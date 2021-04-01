@@ -25,6 +25,9 @@ h/ In chi tiết các câu hỏi đã thi 1 môn học của 1 sinh viên, \
 i/ In bảng điểm thi trắc nghiệm môn học của 1 lớp (nếu có sinh viên chưa thi thì ghi “Chưa thi”.\
 Lưu ý: Chương trình cho phép lưu các danh sách vào file; Kiểm tra các điều kiện làm dữ liệu bị sai. Sinh viên có thể tự thiết kế thêm danh sách để đáp ứng yêu cầu của đề tài.\
 
+
 ---
 
 Phi has Edited. and Fix One more time. Fix the second time.
+ --- 
+ Tôi đang test branch
