@@ -5,11 +5,11 @@
 
 Thi trắc nghiệm : Ta tổ chức các danh sách sau:
 
-1. Danh sách môn học: **danh sách tuyến tính** (MAMH (C15), TENMH).
-2. Danh sách Lop : **mảng con trỏ** (MALOP, TENLOP, con trỏ): con trỏ sẻ trỏ đến danh sách sinh viên thuộc lớp đó.
-3. Danh sách sinh viên : **danh sách liên kết đơn** (MASV, HO, TEN, PHAI, password, con trỏ): con trỏ sẽ trỏ đến điểm các môn đã thi trắc nghiệm.
-4. Danh sách Điểm thi (**danh sách liên kết đơn**) (Mamh, Diem)
-5. Danh sách Câu hỏi thi (**cây nhị phân tìm kiếm với key = Id**) (Id, Mă MH, Nội dung, A, B, C, D, Đáp án); trong đó A, B, C, D là 4 chọn lựa tương ứng với nội dung câu hỏi.
+1. Danh sách môn học: **danh sách tuyến tính** (<ins>MAMH</ins> (C15), TENMH).
+2. Danh sách Lop : **mảng con trỏ** (<ins>MALOP</ins>, TENLOP, con trỏ): con trỏ sẻ trỏ đến danh sách sinh viên thuộc lớp đó.
+3. Danh sách sinh viên : **danh sách liên kết đơn** (<ins>MASV</ins>, HO, TEN, PHAI, password, con trỏ): con trỏ sẽ trỏ đến điểm các môn đã thi trắc nghiệm.
+4. Danh sách Điểm thi (**danh sách liên kết đơn**) (<ins>Mamh</ins>, Diem)
+5. Danh sách Câu hỏi thi (**cây nhị phân tìm kiếm với key = Id**) (<ins>Id</ins>, Mã MH, Nội dung, A, B, C, D, Đáp án); trong đó A, B, C, D là 4 chọn lựa tương ứng với nội dung câu hỏi.
 
 ---
 
