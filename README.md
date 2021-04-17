@@ -4,7 +4,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="images/about-project.png" alt="about-project" width="1474" height="958">
+<img src="images/about-project.png" alt="about-project" width="900">
 
 ---------------
 
