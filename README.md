@@ -1,7 +1,12 @@
 
 # **Quiz Program**
 
-> "One of the toughest challenges with mah friend"
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+<img src="images/about-project.png" alt="about-project" width="900">
+
+---------------
 
 Thi trắc nghiệm : Ta tổ chức các danh sách sau:
 
