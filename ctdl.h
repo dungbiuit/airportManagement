@@ -8,6 +8,7 @@
 
 using namespace std;
 
+const int MAX_SUBJECT_ID_LENGTH = 15;
 const int MAX_SUBJECT = 300;
 const int MAX_CLASS = 500;
 
