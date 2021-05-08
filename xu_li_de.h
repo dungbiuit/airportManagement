@@ -1,6 +1,52 @@
 #pragma once
 #include "ctdl.h"
 
+//=================
+void chuan_hoa_chu(string &a)
+{
+	/*int a = a.length();*/
+	// |...tU...lAnh....|
+	// |TU LANH|
+	//xu li khoang trang dau
+	while (a[0] == ' ')
+	{
+		a.erase(a.begin() + 0);
+	}
+	//xu li khoang trang cuoi
+	if (a[a.length() > 1])
+	{
+		while (a[a.length() - 1] == ' ')
+		{
+			a.erase(a.begin() + a.length() - 1);
+		}
+	}
+	//xu li khoang trang giua
+	for (int i = 0; i < a.length(); i++)
+	{
+		if (a[i] == ' '&& a[i + 1] == ' ')
+		{
+			a.erase(a.begin() + i + 1);
+			i--;
+		}
+	}
+	//in hoa cac ki tu
+	for (int i = 0; i < a.length(); i++)
+	{
+		if (a[i] >= 97 && a[i] <= 122)
+		{
+			a[i] -= 32;
+		}
+	}
+}
+void up_case_char(char &a)
+{
+	if (a >= 97 && a <= 122)
+	{
+		a -= 32;
+	}
+}
+
+//=======================
 //------------------
 string ReturnSubjectIDInput(){
 	string subjectIDReturn;
@@ -189,6 +235,199 @@ void menu(){
 				
 		}
 	}	
+}
+
+
+//===================SUBJECT===================
+int ktra_trung_mon(string a, SubjectList subjectList)
+{
+	for (int i = 0; i < subjectList.index; i++)
+	{
+		if (subjectList.subjectList[i].subjectID == a)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+void sap_xep_chen(SubjectList subjectList) // insertionSort();
+{
+	int index;
+	string value_ma, value_ten;
+	for (int i = 1; i < subjectList.index; i++)
+	{
+		index = i;
+		value_ma = subjectList.subjectList[i].subjectID;
+		value_ten = subjectList.subjectList[i].subjectName;
+		while (index > 0 && subjectList.subjectList[index - 1].subjectID > value_ma)
+		{
+			subjectList.subjectList[index].subjectID = subjectList.subjectList[index - 1].subjectID;
+			subjectList.subjectList[index].subjectName = subjectList.subjectList[index - 1].subjectName;
+			index--;
+		}
+		subjectList.subjectList[index].subjectID = value_ma;
+		subjectList.subjectList[index].subjectName = value_ten;
+	}
+}
+
+void Subject_Add(SubjectList &subjectList){
+	
+	Subject subject;
+	cout<<"\nNhap thong tin mon hoc : ";
+	do{
+		cout<<"\nMa mon : ";
+		cin.ignore();
+		getline(cin, subject.subjectID);
+		chuan_hoa_chu(subject.subjectID);
+		if(subject.subjectID.length() > 15){
+			cout<<"\nVuot qua 15 ki tu, nhap lai.";
+		}
+		
+		while(ktra_trung_mon(subject.subjectID,subjectList) >= 0){
+			cout<<"\nMa mon trung, xin nhap lai.";
+			getline(cin,subject.subjectID);
+		}
+	}while(subject.subjectID.length() > 15);
+	
+	do{
+		cout<<"Ten Mon : ";
+		getline(cin,subject.subjectName);
+		chuan_hoa_chu(subject.subjectName);
+		if(subject.subjectName.length() > 50){
+			cout<<"\nDo dai vuot qua 50, nhap lai.";
+			
+		}
+	}while(subject.subjectName.length() > 50);
+	
+	cout<<"\nNhap thanh cong";
+	subjectList.subjectList[subjectList.index] = subject;
+	subjectList.index++;
+}
+
+void Subject_Delete(SubjectList &subjectList)
+{
+	string a;
+	cout << "\nNHAP MA MON HOC BAN MUON XOA: ";
+	cin.ignore();
+	getline(cin, a);
+	chuan_hoa_chu(a);
+	int ktra_a = ktra_trung_mon(a, subjectList);
+	if (ktra_a < 0)
+	{
+		cout << "\nMa mon khong ton tai";
+	}
+	else
+	{
+		for (int i = ktra_a; i < subjectList.index - 1; i++)
+		{
+			subjectList.subjectList[i].subjectID = subjectList.subjectList[i + 1].subjectID;
+			subjectList.subjectList[i].subjectName = subjectList.subjectList[i + 1].subjectName;
+		}
+		subjectList.index--;
+		cout << "\nXOA THANH CONG!";
+	}
+}
+
+void Subject_Edit(SubjectList &subjectList)
+{
+	string a;
+	cout << "\nNHAP MA MON BAN CAN HIEU CHINH: ";
+	cin.ignore();
+	getline(cin, a);
+	chuan_hoa_chu(a);
+	int ktra = ktra_trung_mon(a, subjectList);
+	if (ktra < 0)
+	{
+
+		cout << "\nMA MON KHONG TON TAI!"<< endl;
+	}
+	else
+	{
+		// ============== hieu chinh =================
+		cout << "NHAP TEN MON: "; 
+		getline(cin, subjectList.subjectList[ktra].subjectName);
+		chuan_hoa_chu(subjectList.subjectList[ktra].subjectID);
+		chuan_hoa_chu(subjectList.subjectList[ktra].subjectName);
+		cout << "DA~ THAY DOI THONG TIN MON HOC.";
+		sap_xep_chen(subjectList);
+	}
+}
+
+void Subject_Print(SubjectList subjectList)
+{
+	cout << "\nDANH SACH MON HOC";
+	cout << "\n=======================================";
+	for (int i = 0; i < subjectList.index; i++)
+	{
+		cout << "\n MA MON   :   " << subjectList.subjectList[i].subjectID;
+		cout << "\n TEN MON  :   " << subjectList.subjectList[i].subjectName;
+		cout << "\n---------------------------------------";
+	}
+}
+
+void Subject_Menu(SubjectList &subjectList)
+{
+	bool kt = true;
+	while (kt == true)
+	{
+		int lua_chon;
+		system("cls");
+		cout << "1. Them mon hoc. " << endl;
+		cout << "2. Xoa mon hoc." << endl;
+		cout << "3. Hieu chinh mon hoc." << endl;
+		cout << "4. Xuat danh sach mon hoc." << endl;
+		cout << "0. Thoat." << endl;
+		cout << "Nhap lua chon: ";
+		cin >> lua_chon;
+		switch (lua_chon)
+		{
+		case 1:
+		{
+			if (subjectList.index >= MAX_SUBJECT)
+			{
+				cout << "So luong mon hoc vuot qua so luong cko phep (300), hay xoa bot truoc khi them vao!";
+				system("pause");
+			}
+			else
+			{
+				system("cls");
+				Subject_Add(subjectList);
+				sap_xep_chen(subjectList); // sắp xếp mã môn học ngay sau khi nhập 
+				system("pause");
+			} 
+			break;
+		}
+		case 2:
+		{
+			system("cls");
+			Subject_Delete(subjectList);
+			system("pause");
+			break;
+		}
+		case 3:
+		{
+			system("cls");
+			Subject_Edit(subjectList);
+			system("pause");
+			break;
+		}
+		case 4:
+		{
+			system("cls");
+			Subject_Print(subjectList);
+			system("pause");
+			break;
+		}
+		case 0:
+		{
+			kt = false;
+			break;
+		}
+		default:
+			break;
+		}
+	}
 }
 
 

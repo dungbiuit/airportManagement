@@ -1,8 +1,8 @@
 #include "xu_li_de.h"
 int main() {
 	
-
-	menu();
+	SubjectList subjectList;
+	Subject_Menu(subjectList);
 	getch();
 	return 0;
 }
