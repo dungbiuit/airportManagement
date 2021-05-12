@@ -46,6 +46,13 @@ void up_case_char(char &a)
 	}
 }
 
+void ClassList_Liberate(ClassList &classList)
+{
+	for (int i = 0; i < classList.index; i++)
+	{
+		delete classList.classList[i];
+	}
+}
 //=======================
 //------------------
 string ReturnSubjectIDInput(){
@@ -271,7 +278,7 @@ void sap_xep_chen(SubjectList subjectList) // insertionSort();
 	}
 }
 
-void Subject_Add(SubjectList &subjectList){
+void Subject_Add(SubjectList &subjectList){ // Struct_action
 	
 	Subject subject;
 	cout<<"\nNhap thong tin mon hoc : ";
@@ -430,6 +437,65 @@ void Subject_Menu(SubjectList &subjectList)
 	}
 }
 
+//Student 
+void Student_Input(Student &studentToAdd){
+	cout<<"\nInput Student ID";
+	cin>>studentToAdd.studentID;
+	cout<<"\nStudent last Name: ";
+	cin>>studentToAdd.studentLastName;
+	cout<<"\nStudent first Name: ";
+	cin>>studentToAdd.studentFirstName;
+	cout<<"\nType gender: ";
+	cin>>studentToAdd.gender;
+	studentToAdd.password = "123456";
+}
+
+void Student_Print(Student studentToPrint){
+	cout<<"\nStudent ID: "<<studentToPrint.studentID;
+	cout<<"\nStudent last Name: "<<studentToPrint.studentLastName;
+	cout<<"\nStudent first Name: "<<studentToPrint.studentFirstName;
+	cout<<"\nStudent gender: "<<studentToPrint.gender;
+	cout<<"\nStudent password: "<<studentToPrint.password;
+}
+
+NodeStudent* Student_CreateNode(){
+	NodeStudent* newNodeStudent = new NodeStudent;
+	if(newNodeStudent == NULL){ // not enough RAM
+		return NULL;
+	}
+	Student_Input(newNodeStudent->data);
+	newNodeStudent->pNext = NULL;
+	return newNodeStudent;
+}
+
+void Student_AddNodeToHeadList(NodeStudent* &pHead, NodeStudent* NodeToAdd){
+	if(pHead->pNext == NULL){
+		pHead = NodeToAdd;
+	}else{
+		NodeToAdd->pNext = pHead;
+		pHead = NodeToAdd;
+	}
+}
+
+void Student_AddNodeToTailList(NodeStudent* &pHead, NodeStudent* NodeToAdd){
+	if(pHead->pNext == NULL){
+		pHead = NodeToAdd;
+	}else{
+		for(NodeStudent *pTraverse = pHead;;pTraverse = pTraverse->pNext){
+			if(pTraverse->pNext == NULL){
+				pTraverse->pNext = NodeToAdd;
+			}
+		}
+	}
+}
+
+
+void StudentList_PrintStudentList(NodeStudent* pHead){
+	for(NodeStudent* pTraverse = pHead; pTraverse != NULL; pTraverse = pTraverse->pNext){
+		Student_Print(pTraverse->data);
+		cout<<endl;
+	}
+}
 
 
 

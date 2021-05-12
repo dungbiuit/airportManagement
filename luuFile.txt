@@ -1,0 +1,14 @@
+int LoadFile (char *tenfile , list &ds) {
+FILE *f;
+f=fopen(tenfile,"rt");
+if (f==NULL) return 0;
+
+
+
+fscanf(f,"%d", &ds.n);
+for ( int i=0 ; i<ds.n ; i++)
+fscanf(f,"%d ", &ds.nodes[i]);
+
+fclose (f);
+return 1;
+}

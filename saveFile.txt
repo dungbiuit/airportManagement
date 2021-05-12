@@ -1,0 +1,17 @@
+int SaveFile (char *tenfile , list &ds) {
+FILE *f;
+f=fopen(tenfile,"wt");
+if (f==NULL) return 0;
+
+
+
+fprintf(f,"%d ", ds.n);
+fprintf(f,"\n");
+for ( int i=0 ; i<ds.n ; i++)
+{
+fprintf(f,"%12d", ds.nodes[i]);
+if ((i+1) %10 ==0)fprintf(f,"\n");
+}
+fclose (f);
+cout << "Da ghi xong day so"; return 1;
+}
