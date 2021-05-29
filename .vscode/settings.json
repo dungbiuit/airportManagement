@@ -1,0 +1,9 @@
+{
+    "workbench.colorCustomizations": {
+    "editor.rulers": [80,120]
+
+    },
+    "files.associations": {
+        "xstring": "cpp"
+    }
+}

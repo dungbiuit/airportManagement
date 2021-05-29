@@ -23,7 +23,7 @@ void chuan_hoa_chu(string &a)
 	//xu li khoang trang giua
 	for (int i = 0; i < a.length(); i++)
 	{
-		if (a[i] == ' '&& a[i + 1] == ' ')
+		if (a[i] == ' ' && a[i + 1] == ' ')
 		{
 			a.erase(a.begin() + i + 1);
 			i--;
@@ -55,195 +55,226 @@ void ClassList_Liberate(ClassList &classList)
 }
 //=======================
 //------------------
-string ReturnSubjectIDInput(){
+string ReturnSubjectIDInput()
+{
 	string subjectIDReturn;
-	do{
-		cout<<"Input subject ID: ";
+	do
+	{
+		cout << "Input subject ID: ";
 		cin.ignore();
-		getline(cin, subjectIDReturn);	
-		if(subjectIDReturn.length() > MAX_SUBJECT_ID_LENGTH)
-			cout<<"\nID reached limited 15 characters, please type again!!!\n";	
-	}while(subjectIDReturn.length() > MAX_SUBJECT_ID_LENGTH); 	
+		getline(cin, subjectIDReturn);
+		if (subjectIDReturn.length() > MAX_SUBJECT_ID_LENGTH)
+			cout << "\nID reached limited 15 characters, please type again!!!\n";
+	} while (subjectIDReturn.length() > MAX_SUBJECT_ID_LENGTH);
 	return subjectIDReturn;
 }
 
-string ReturnClassIDInput(){
+string ReturnClassIDInput()
+{
 	string classIDReturn;
-		cout<<"Input class ID: ";
-		cin.ignore();
-		getline(cin, classIDReturn);	 	
+	cout << "Input class ID: ";
+	cin.ignore();
+	getline(cin, classIDReturn);
 	return classIDReturn;
 }
 
-
-void LimitID_Exceed(string ID_ToCheck){
-	if(ID_ToCheck.length() > MAX_SUBJECT_ID_LENGTH){
-		cout<<"ID reached limited 15 characters";
+void LimitID_Exceed(string ID_ToCheck)
+{
+	if (ID_ToCheck.length() > MAX_SUBJECT_ID_LENGTH)
+	{
+		cout << "ID reached limited 15 characters";
 	}
 }
 
-bool CheckExistSubject(SubjectList listToCheck, string subject_ID_ToCheck){
-	for(int i = 0; i < listToCheck.index; i++){
-		if(listToCheck.subjectList[i].subjectID == subject_ID_ToCheck)
+bool CheckExistSubject(SubjectList listToCheck, string subject_ID_ToCheck)
+{
+	for (int i = 0; i < listToCheck.index; i++)
+	{
+		if (listToCheck.subjectList[i].subjectID == subject_ID_ToCheck)
 			return true;
 	}
 	return false;
 }
 
-bool CheckExistClass(ClassList listToCheck, string class_ID_ToCheck){
-	for(int i = 0; i < listToCheck.index; i++){
-		if(listToCheck.classList[i]->classID == class_ID_ToCheck)
+bool CheckExistClass(ClassList listToCheck, string class_ID_ToCheck)
+{
+	for (int i = 0; i < listToCheck.index; i++)
+	{
+		if (listToCheck.classList[i]->classID == class_ID_ToCheck)
 			return true;
 	}
 	return false;
 }
 
-
-void AddSubject(SubjectList &list){
+void AddSubject(SubjectList &list)
+{
 	Subject subject;
 	subject.subjectID = ReturnSubjectIDInput();
-	if(CheckExistSubject(list, subject.subjectID)){
-		cout<<"Sorry, ID existed"<<endl;
+	if (CheckExistSubject(list, subject.subjectID))
+	{
+		cout << "Sorry, ID existed" << endl;
 		return;
 	}
-	cout<<"Input subject name : ";
+	cout << "Input subject name : ";
 	getline(cin, subject.subjectName);
-	
-		if(list.index > MAX_SUBJECT) return;
+
+	if (list.index > MAX_SUBJECT)
+		return;
 	list.subjectList[list.index] = subject;
 	list.index++;
 }
 
-int GetSubjectIndexBySubjectID(SubjectList list, string subjectIDToFind){
-	for(int i = 0; i < list.index; i++){
-		if(list.subjectList[i].subjectID == subjectIDToFind)
+int GetSubjectIndexBySubjectID(SubjectList list, string subjectIDToFind)
+{
+	for (int i = 0; i < list.index; i++)
+	{
+		if (list.subjectList[i].subjectID == subjectIDToFind)
 			return i;
 	}
 	return -1;
 }
 
-int GetClassIndexByClassID(ClassList list, string classIDToFind){
-	for(int i = 0; i < list.index; i++){
-		if(list.classList[i]->classID == classIDToFind)
+int GetClassIndexByClassID(ClassList list, string classIDToFind)
+{
+	for (int i = 0; i < list.index; i++)
+	{
+		if (list.classList[i]->classID == classIDToFind)
 			return i;
 	}
 	return -1;
 }
 
-void DeleteSubject(SubjectList &listToChange, int indexToDelete){
-	if(indexToDelete == -1){
-		cout<<"\nID not Existed, can't delete !!!\n";
+void DeleteSubject(SubjectList &listToChange, int indexToDelete)
+{
+	if (indexToDelete == -1)
+	{
+		cout << "\nID not Existed, can't delete !!!\n";
 		return;
 	}
-	
-	for(int i = indexToDelete + 1; i < listToChange.index; i++){
-		listToChange.subjectList[i-1] = listToChange.subjectList[i];
+
+	for (int i = indexToDelete + 1; i < listToChange.index; i++)
+	{
+		listToChange.subjectList[i - 1] = listToChange.subjectList[i];
 	}
-	
+
 	listToChange.index--;
 }
 
-void DeleteClass(ClassList &listToChange, int indexToDelete){
-	if(indexToDelete == -1){
-		cout<<"\nID not Existed, can't delete !!!\n";
+void DeleteClass(ClassList &listToChange, int indexToDelete)
+{
+	if (indexToDelete == -1)
+	{
+		cout << "\nID not Existed, can't delete !!!\n";
 		return;
 	}
-	for(int i = indexToDelete + 1; i < listToChange.index; i++){
-		listToChange.classList[i-1] = listToChange.classList[i];
+	for (int i = indexToDelete + 1; i < listToChange.index; i++)
+	{
+		listToChange.classList[i - 1] = listToChange.classList[i];
 	}
 	listToChange.index--;
 }
 
-void PrintSubjectList(SubjectList list){
-	for(int i = 0; i < list.index; i++){
-		cout<<"Subject "<<i+1<<endl;
-		cout<<"  ID : "<<list.subjectList[i].subjectID<<endl;
-		cout<<"  Name : "<<list.subjectList[i].subjectName<<endl;
-		cout<<"-------------"<<endl;
+void PrintSubjectList(SubjectList list)
+{
+	for (int i = 0; i < list.index; i++)
+	{
+		cout << "Subject " << i + 1 << endl;
+		cout << "  ID : " << list.subjectList[i].subjectID << endl;
+		cout << "  Name : " << list.subjectList[i].subjectName << endl;
+		cout << "-------------" << endl;
 	}
 }
 
-void AddClass(ClassList &classListChange){
+void AddClass(ClassList &classListChange)
+{
 	Class *classPointer = new Class;
 	classPointer->classID = ReturnClassIDInput();
-	if(CheckExistClass(classListChange, classPointer->classID)){
-		cout<<"Sorry, ID existed"<<endl;
+	if (CheckExistClass(classListChange, classPointer->classID))
+	{
+		cout << "Sorry, ID existed" << endl;
 		return;
 	}
-	cout<<"Input class name : ";
+	cout << "Input class name : ";
 	getline(cin, classPointer->className);
-	
-		if(classListChange.index > MAX_CLASS) return;
+
+	if (classListChange.index > MAX_CLASS)
+		return;
 	classListChange.classList[classListChange.index] = classPointer;
 	classListChange.index++;
 }
 
-void PrintClassList(ClassList list){
-	for(int i = 0; i < list.index; i++){
-		cout<<"Subject "<<i+1<<endl;
-		cout<<"  ID : "<<list.classList[i]->classID<<endl;
-		cout<<"  Name : "<<list.classList[i]->className<<endl;
-		cout<<"-------------"<<endl;
+void PrintClassList(ClassList list)
+{
+	for (int i = 0; i < list.index; i++)
+	{
+		cout << "Subject " << i + 1 << endl;
+		cout << "  ID : " << list.classList[i]->classID << endl;
+		cout << "  Name : " << list.classList[i]->className << endl;
+		cout << "-------------" << endl;
 	}
 }
 
+void menu()
+{
 
-void menu(){
-	
 	SubjectList subjectList;
 	ClassList classList;
 	bool check = true;
-	while(check){
-		cout<<"\n1. Add Subject" << endl;
-		cout<<"2. Delete Subject" << endl;
-		cout<<"3. Print Subject List"<<endl;
-		cout<<"\n4. Add Class" << endl;
-		cout<<"5. Delete Class" << endl;
-		cout<<"6. Print Class List"<<endl;
-		cout<<"0. Exit"<<endl;
-		
-		int select;
-		cout<<"Your select is : ";
-		cin>>select;
-		
-		switch(select){
-			case 1:
-				AddSubject(subjectList);
-				break;
-			case 2:{
-				string ID_ToCheck = ReturnSubjectIDInput();
-				int indexOfSubjectID = GetSubjectIndexBySubjectID(subjectList, ID_ToCheck);
-				DeleteSubject(subjectList, indexOfSubjectID);			
-				break;
-			}
-				
-			case 3:
-				PrintSubjectList(subjectList);
-				break;
-			
-			case 4:{
-				AddClass(classList);
-				break;
-			}
-			case 5:{
-				string ID_ToCheck = ReturnClassIDInput();
-				int indexOfClassID = GetClassIndexByClassID(classList, ID_ToCheck);
-				DeleteClass(classList, indexOfClassID);			
-				break;
-			}
-			case 6:{
-				PrintClassList(classList);
-				break;
-			}
-			
-			case 0:
-				check = false;
-				break;
-				
-		}
-	}	
-}
+	while (check)
+	{
+		cout << "\n1. Add Subject" << endl;
+		cout << "2. Delete Subject" << endl;
+		cout << "3. Print Subject List" << endl;
+		cout << "\n4. Add Class" << endl;
+		cout << "5. Delete Class" << endl;
+		cout << "6. Print Class List" << endl;
+		cout << "0. Exit" << endl;
 
+		int select;
+		cout << "Your select is : ";
+		cin >> select;
+
+		switch (select)
+		{
+		case 1:
+			AddSubject(subjectList);
+			break;
+		case 2:
+		{
+			string ID_ToCheck = ReturnSubjectIDInput();
+			int indexOfSubjectID = GetSubjectIndexBySubjectID(subjectList, ID_ToCheck);
+			DeleteSubject(subjectList, indexOfSubjectID);
+			break;
+		}
+
+		case 3:
+			PrintSubjectList(subjectList);
+			break;
+
+		case 4:
+		{
+			AddClass(classList);
+			break;
+		}
+		case 5:
+		{
+			string ID_ToCheck = ReturnClassIDInput();
+			int indexOfClassID = GetClassIndexByClassID(classList, ID_ToCheck);
+			DeleteClass(classList, indexOfClassID);
+			break;
+		}
+		case 6:
+		{
+			PrintClassList(classList);
+			break;
+		}
+
+		case 0:
+			check = false;
+			break;
+		}
+	}
+}
 
 //===================SUBJECT===================
 int ktra_trung_mon(string a, SubjectList subjectList)
@@ -278,36 +309,41 @@ void sap_xep_chen(SubjectList subjectList) // insertionSort();
 	}
 }
 
-void Subject_Add(SubjectList &subjectList){ // Struct_action
-	
+void Subject_Add(SubjectList &subjectList)
+{ // Struct_action
+
 	Subject subject;
-	cout<<"\nNhap thong tin mon hoc : ";
-	do{
-		cout<<"\nMa mon : ";
+	cout << "\nNhap thong tin mon hoc : ";
+	do
+	{
+		cout << "\nMa mon : ";
 		cin.ignore();
 		getline(cin, subject.subjectID);
 		chuan_hoa_chu(subject.subjectID);
-		if(subject.subjectID.length() > 15){
-			cout<<"\nVuot qua 15 ki tu, nhap lai.";
+		if (subject.subjectID.length() > 15)
+		{
+			cout << "\nVuot qua 15 ki tu, nhap lai.";
 		}
-		
-		while(ktra_trung_mon(subject.subjectID,subjectList) >= 0){
-			cout<<"\nMa mon trung, xin nhap lai.";
-			getline(cin,subject.subjectID);
+
+		while (ktra_trung_mon(subject.subjectID, subjectList) >= 0)
+		{
+			cout << "\nMa mon trung, xin nhap lai.";
+			getline(cin, subject.subjectID);
 		}
-	}while(subject.subjectID.length() > 15);
-	
-	do{
-		cout<<"Ten Mon : ";
-		getline(cin,subject.subjectName);
+	} while (subject.subjectID.length() > 15);
+
+	do
+	{
+		cout << "Ten Mon : ";
+		getline(cin, subject.subjectName);
 		chuan_hoa_chu(subject.subjectName);
-		if(subject.subjectName.length() > 50){
-			cout<<"\nDo dai vuot qua 50, nhap lai.";
-			
+		if (subject.subjectName.length() > 50)
+		{
+			cout << "\nDo dai vuot qua 50, nhap lai.";
 		}
-	}while(subject.subjectName.length() > 50);
-	
-	cout<<"\nNhap thanh cong";
+	} while (subject.subjectName.length() > 50);
+
+	cout << "\nNhap thanh cong";
 	subjectList.subjectList[subjectList.index] = subject;
 	subjectList.index++;
 }
@@ -347,12 +383,12 @@ void Subject_Edit(SubjectList &subjectList)
 	if (ktra < 0)
 	{
 
-		cout << "\nMA MON KHONG TON TAI!"<< endl;
+		cout << "\nMA MON KHONG TON TAI!" << endl;
 	}
 	else
 	{
 		// ============== hieu chinh =================
-		cout << "NHAP TEN MON: "; 
+		cout << "NHAP TEN MON: ";
 		getline(cin, subjectList.subjectList[ktra].subjectName);
 		chuan_hoa_chu(subjectList.subjectList[ktra].subjectID);
 		chuan_hoa_chu(subjectList.subjectList[ktra].subjectName);
@@ -400,9 +436,9 @@ void Subject_Menu(SubjectList &subjectList)
 			{
 				system("cls");
 				Subject_Add(subjectList);
-				sap_xep_chen(subjectList); // sắp xếp mã môn học ngay sau khi nhập 
+				sap_xep_chen(subjectList); // sắp xếp mã môn học ngay sau khi nhập
 				system("pause");
-			} 
+			}
 			break;
 		}
 		case 2:
@@ -437,30 +473,34 @@ void Subject_Menu(SubjectList &subjectList)
 	}
 }
 
-//Student 
-void Student_Input(Student &studentToAdd){
-	cout<<"\nInput Student ID";
-	cin>>studentToAdd.studentID;
-	cout<<"\nStudent last Name: ";
-	cin>>studentToAdd.studentLastName;
-	cout<<"\nStudent first Name: ";
-	cin>>studentToAdd.studentFirstName;
-	cout<<"\nType gender: ";
-	cin>>studentToAdd.gender;
+//Student
+void Student_Input(Student &studentToAdd)
+{
+	cout << "\nInput Student ID";
+	cin >> studentToAdd.studentID;
+	cout << "\nStudent last Name: ";
+	cin >> studentToAdd.studentLastName;
+	cout << "\nStudent first Name: ";
+	cin >> studentToAdd.studentFirstName;
+	cout << "\nType gender: ";
+	cin >> studentToAdd.gender;
 	studentToAdd.password = "123456";
 }
 
-void Student_Print(Student studentToPrint){
-	cout<<"\nStudent ID: "<<studentToPrint.studentID;
-	cout<<"\nStudent last Name: "<<studentToPrint.studentLastName;
-	cout<<"\nStudent first Name: "<<studentToPrint.studentFirstName;
-	cout<<"\nStudent gender: "<<studentToPrint.gender;
-	cout<<"\nStudent password: "<<studentToPrint.password;
+void Student_Print(Student studentToPrint)
+{
+	cout << "\nStudent ID: " << studentToPrint.studentID;
+	cout << "\nStudent last Name: " << studentToPrint.studentLastName;
+	cout << "\nStudent first Name: " << studentToPrint.studentFirstName;
+	cout << "\nStudent gender: " << studentToPrint.gender;
+	cout << "\nStudent password: " << studentToPrint.password;
 }
 
-NodeStudent* Student_CreateNode(){
-	NodeStudent* newNodeStudent = new NodeStudent;
-	if(newNodeStudent == NULL){ // not enough RAM
+NodeStudent *Student_CreateNode()
+{
+	NodeStudent *newNodeStudent = new NodeStudent;
+	if (newNodeStudent == NULL)
+	{ // not enough RAM
 		return NULL;
 	}
 	Student_Input(newNodeStudent->data);
@@ -468,37 +508,69 @@ NodeStudent* Student_CreateNode(){
 	return newNodeStudent;
 }
 
-void Student_AddNodeToHeadList(NodeStudent* &pHead, NodeStudent* NodeToAdd){
-	if(pHead->pNext == NULL){
+void Student_AddNodeToHeadList(NodeStudent *&pHead, NodeStudent *NodeToAdd)
+{
+	if (pHead->pNext == NULL)
+	{
 		pHead = NodeToAdd;
-	}else{
+	}
+	else
+	{
 		NodeToAdd->pNext = pHead;
 		pHead = NodeToAdd;
 	}
 }
 
-void Student_AddNodeToTailList(NodeStudent* &pHead, NodeStudent* NodeToAdd){
-	if(pHead->pNext == NULL){
+void Student_AddNodeToTailList(NodeStudent *&pHead, NodeStudent *NodeToAdd)
+{
+	if (pHead->pNext == NULL)
+	{
 		pHead = NodeToAdd;
-	}else{
-		for(NodeStudent *pTraverse = pHead;;pTraverse = pTraverse->pNext){
-			if(pTraverse->pNext == NULL){
+	}
+	else
+	{
+		for (NodeStudent *pTraverse = pHead;; pTraverse = pTraverse->pNext)
+		{
+			if (pTraverse->pNext == NULL)
+			{
 				pTraverse->pNext = NodeToAdd;
 			}
 		}
 	}
 }
 
-
-void StudentList_PrintStudentList(NodeStudent* pHead){
-	for(NodeStudent* pTraverse = pHead; pTraverse != NULL; pTraverse = pTraverse->pNext){
+void StudentList_PrintStudentList(NodeStudent *pHead)
+{
+	for (NodeStudent *pTraverse = pHead; pTraverse != NULL; pTraverse = pTraverse->pNext)
+	{
 		Student_Print(pTraverse->data);
-		cout<<endl;
+		cout << endl;
 	}
 }
 
+void StudentList_ShowMenu(){
+	cout<<"1.Add a student : "<<"\n";
+	cout<<"2.Print student list: "<<"\n";
+	cout<<"3.Back";
+}
 
-
-
-
-
+void StudentList_RunMenu(StudentList listOfStudents){
+	int selection = 0;
+	while(selection != 0){
+		switch (selection)
+		{
+		case 1:{
+			Student newStudentToAdd;
+			Student_Input(newStudentToAdd);
+			break;
+		}
+		case 2:{
+			StudentList 
+			break;
+		}
+		
+		default:
+			break;
+		}
+	}
+}
